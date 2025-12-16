@@ -1,8 +1,8 @@
+import { Customer } from '@/entities/customer/model/customer.model'
 import { useCustomerPurchasesQuery } from '@/entities/customer/query/useCustomerPurchasesQuery'
+import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 import { Col, Row, Spin } from 'antd'
 import { CustomerPurchaseItem } from './CustomerPurchaseItem'
-import { Customer } from '@/entities/customer/model/customer.model'
-import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 
 type Props = {
   customerId: Customer['id']
@@ -11,16 +11,16 @@ type Props = {
 function CustomerPurchaseDetail({ customerId }: Props) {
   const { data = [], isLoading, isFetching } = useCustomerPurchasesQuery(customerId)
 
-  if (data.length === 0) {
-    return <EmptyFallback text="고객 상세 구매 내역 정보가 없습니다." />
-  }
-
   if (isLoading || isFetching) {
     return (
       <Centered>
         <Spin />
       </Centered>
     )
+  }
+
+  if (data.length === 0) {
+    return <EmptyFallback text="고객 상세 구매 내역 정보가 없습니다." />
   }
 
   return (
