@@ -1,0 +1,1 @@
+export { CustomerPurchaseDetail } from './CustomerPurchaseDetail'

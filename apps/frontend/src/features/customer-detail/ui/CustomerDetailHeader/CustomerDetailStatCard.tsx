@@ -8,7 +8,7 @@ type Props = {
   value: React.ReactNode
 }
 
-function StatCard({ icon, label, value }: Props) {
+function CustomerDetailStatCard({ icon, label, value }: Props) {
   const { token } = theme.useToken()
 
   return (
@@ -22,4 +22,4 @@ function StatCard({ icon, label, value }: Props) {
   )
 }
 
-export { StatCard }
+export { CustomerDetailStatCard }
