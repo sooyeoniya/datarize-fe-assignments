@@ -3,7 +3,7 @@ import { CustomerListPanel } from '@/features/customer-list'
 import { CustomerItem } from '@/features/customer-list/customers.types'
 import { PurchaseFrequencyPanel } from '@/features/purchase-frequency'
 import { useState } from 'react'
-import * as S from './DsahboardPage.styled'
+import * as S from './DashboardPage.styled'
 import { DashboardLayout } from './ui/DashboardLayout/DashboardLayout'
 
 function DashboardPage() {
