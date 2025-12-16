@@ -1,3 +1,4 @@
+import { CustomerListPanel } from '@/features/customer-list'
 import * as S from './DsahboardPage.styled'
 import { DashboardLayout } from './ui/DashboardLayout/DashboardLayout'
 
@@ -5,7 +6,9 @@ function DashboardPage() {
   return (
     <DashboardLayout>
       <S.RootRow gutter={24}>
-        <S.LeftCol span={8}>{/* 고객 목록 패널 */}</S.LeftCol>
+        <S.LeftCol span={8}>
+          <CustomerListPanel />
+        </S.LeftCol>
 
         <S.RightCol span={16}>
           <S.RightInnerRow gutter={[0, 24]}>
