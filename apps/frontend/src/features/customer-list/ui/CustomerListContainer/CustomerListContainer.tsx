@@ -1,27 +1,12 @@
-import { Card, Input } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Card } from 'antd'
 
 type Props = {
-  search: string
-  onSearchChange: (value: string) => void
+  extra: React.ReactNode
 } & React.PropsWithChildren
 
-function CustomerListContainer({ search, onSearchChange, children }: Props) {
+function CustomerListContainer({ extra, children }: Props) {
   return (
-    <Card
-      title="고객 목록"
-      extra={
-        <Input
-          prefix={<SearchOutlined />}
-          placeholder="고객 이름 검색"
-          value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-          allowClear
-        />
-      }
-      style={cardStyle}
-      styles={{ body: cardBodyStyle }}
-    >
+    <Card title="고객 목록" extra={extra} style={cardStyle} styles={{ body: cardBodyStyle }}>
       {children}
     </Card>
   )
