@@ -2,7 +2,7 @@ import { Customer } from '@/entities/customer/model/customer.model'
 import { useCustomersQuery } from '@/entities/customer/query/useCustomersQuery'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
-import { Table } from 'antd'
+import { Table, TableProps } from 'antd'
 import { ColumnsType, SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
 
@@ -46,10 +46,17 @@ type Props = {
 function CustomerList({ onSelectCustomer, searchQuery }: Props) {
   const [sortOrder, setSortOrder] = useState<SortOrder>(null)
   const sortBy = sortOrder ? SORT_ORDER_MAP[sortOrder] : undefined
+
   const { data = [], isFetching } = useCustomersQuery({ sortBy, name: searchQuery || undefined })
 
   if (data.length === 0) {
     return <EmptyFallback text="고객 목록 정보가 없습니다." />
+  }
+
+  const handleTableChange: TableProps<Customer>['onChange'] = (_, __, sorter) => {
+    if (!Array.isArray(sorter)) {
+      setSortOrder(sorter.order ?? null)
+    }
   }
 
   return (
@@ -60,11 +67,7 @@ function CustomerList({ onSelectCustomer, searchQuery }: Props) {
       dataSource={data}
       loading={isFetching}
       columns={CUSTOMER_TABLE_COLUMNS(sortOrder)}
-      onChange={(_, __, sorter) => {
-        if (!Array.isArray(sorter)) {
-          setSortOrder(sorter.order ?? null)
-        }
-      }}
+      onChange={handleTableChange}
       onRow={(record) => ({
         onClick: () => onSelectCustomer(record),
         style: { cursor: 'pointer' },
