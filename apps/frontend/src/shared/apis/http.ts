@@ -4,7 +4,8 @@ import { HttpOptions } from './types'
 
 export async function httpGet<T>(url: string, { params, signal }: HttpOptions = {}): Promise<T> {
   const query = buildQuery(params)
-  const fullUrl = query ? `${url}?${query}` : url
+  const baseUrl = `/api${url}`
+  const fullUrl = query ? `${baseUrl}?${query}` : baseUrl
 
   const res = await fetch(fullUrl, { signal })
 
