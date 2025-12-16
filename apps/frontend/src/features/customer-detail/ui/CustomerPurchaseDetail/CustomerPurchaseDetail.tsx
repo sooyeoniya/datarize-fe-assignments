@@ -2,14 +2,18 @@ import { useCustomerPurchasesQuery } from '@/entities/customer/query/useCustomer
 import { Col, Row, Spin } from 'antd'
 import { CustomerPurchaseItem } from './CustomerPurchaseItem'
 import { Customer } from '@/entities/customer/model/customer.model'
+import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 
 type Props = {
   customerId: Customer['id']
 }
 
-// TODO: 데이터가 없을 때는 Empty 컴포넌트 보여주기
 function CustomerPurchaseDetail({ customerId }: Props) {
   const { data = [], isLoading, isFetching } = useCustomerPurchasesQuery(customerId)
+
+  if (data.length === 0) {
+    return <EmptyFallback text="고객 상세 구매 내역 정보가 없습니다." />
+  }
 
   if (isLoading || isFetching) {
     return (

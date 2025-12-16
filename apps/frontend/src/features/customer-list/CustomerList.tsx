@@ -6,6 +6,7 @@ import { Card, Input, Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
 import { Customer } from '@/entities/customer/model/customer.model'
+import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 
 type Props = {
   onSelectCustomer: (customer: Customer) => void
@@ -22,6 +23,27 @@ function CustomerList({ onSelectCustomer }: Props) {
     sortBy: sortOrder === 'ascend' ? 'asc' : sortOrder === 'descend' ? 'desc' : undefined,
     name: debouncedSearch || undefined,
   })
+
+  if (data.length === 0) {
+    return (
+      <Card
+        title="고객 목록"
+        extra={
+          <Input
+            prefix={<SearchOutlined />}
+            placeholder="고객 이름 검색"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            allowClear
+          />
+        }
+        style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}
+        styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'auto' } }}
+      >
+        <EmptyFallback text="고객 목록 정보가 없습니다." />
+      </Card>
+    )
+  }
 
   return (
     // TODO: 스타일 모두 분리

@@ -4,12 +4,12 @@ import { formatPriceRange } from '@/shared/lib/formatPriceRange'
 import { Card, DatePicker, theme } from 'antd'
 import dayjs, { Dayjs } from 'dayjs'
 import { useState } from 'react'
+import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const { RangePicker } = DatePicker
 
 // TODO: 날짜 데이터도 path params에 넣는 거 어떨까?
-// TODO: 데이터가 없을 때는 Empty 컴포넌트 보여주기
 const DEFAULT_FROM = '2024-07-01'
 const DEFAULT_TO = '2024-07-31'
 
@@ -21,6 +21,33 @@ function PurchaseFrequencyChart() {
     from: range[0].format('YYYY-MM-DD'),
     to: range[1].format('YYYY-MM-DD'),
   })
+
+  const totalCount = data.reduce((sum, item) => sum + item.count, 0)
+
+  if (totalCount === 0) {
+    return (
+      <Card
+        title="가격대별 구매 빈도"
+        extra={
+          <RangePicker
+            value={range}
+            onChange={(values) => {
+              if (!values) return
+
+              const [fromDate, toDate] = values
+              if (!fromDate || !toDate) return
+
+              setRange([fromDate, toDate])
+            }}
+          />
+        }
+        style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}
+        styles={{ body: { flex: 1, display: 'flex', minHeight: 0 } }}
+      >
+        <EmptyFallback text="해당 기간의 구매 데이터가 없습니다." />
+      </Card>
+    )
+  }
 
   const chartData = data.map((item) => ({ range: formatPriceRange(item.range), count: formatNumber(item.count) }))
 

@@ -4,7 +4,7 @@ type Props = {
   title: string
 }
 
-function AntdCardLoadingFallback({ title }: Props) {
+function CardLoadingFallback({ title }: Props) {
   return (
     <Card title={title} style={{ height: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 240 }}>
@@ -14,4 +14,4 @@ function AntdCardLoadingFallback({ title }: Props) {
   )
 }
 
-export { AntdCardLoadingFallback }
+export { CardLoadingFallback }

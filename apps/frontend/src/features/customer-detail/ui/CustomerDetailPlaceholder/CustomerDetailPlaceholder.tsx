@@ -1,13 +1,11 @@
 import { Card, Typography } from 'antd'
 
-const { Paragraph } = Typography
+const { Text } = Typography
 
 function CustomerDetailPlaceholder() {
   return (
     <Card title="고객 상세 구매 내역" style={cardStyle} styles={{ body: cardBodyStyle }}>
-      <Paragraph style={{ textAlign: 'center', color: '#999' }}>
-        좌측 고객을 선택하여 상세 구매 내역을 확인하세요.
-      </Paragraph>
+      <Text type="secondary">좌측 고객을 선택하여 상세 구매 내역을 확인하세요.</Text>
     </Card>
   )
 }
