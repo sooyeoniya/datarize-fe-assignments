@@ -1,7 +1,17 @@
-import { Card } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
+import { Card, Typography } from 'antd'
+import { CustomerItem } from '../customer-list/customers.types'
+import { CustomerDetailHeader } from './CustomerDetailHeader'
+import { CustomerPurchaseDetail } from './CustomerPurchaseDetail'
 
-function CustomerDetailPanel() {
-  const hasSelectedCustomer = !!false
+const { Text } = Typography
+
+type Props = {
+  customer: CustomerItem | null
+}
+
+function CustomerDetailPanel({ customer }: Props) {
+  const hasSelectedCustomer = !!customer
 
   if (!hasSelectedCustomer) {
     return (
@@ -18,9 +28,20 @@ function CustomerDetailPanel() {
   return (
     <Card
       title="고객 상세 구매 내역"
+      extra={
+        <Text strong>
+          <UserOutlined style={{ marginRight: 8 }} />
+          {customer.name} (ID: {customer.id})
+        </Text>
+      }
       style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}
-      styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'auto' } }}
-    ></Card>
+      styles={{
+        body: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'auto', gap: '24px' },
+      }}
+    >
+      <CustomerDetailHeader count={customer.count} totalAmount={customer.totalAmount} />
+      <CustomerPurchaseDetail customerId={customer.id} />
+    </Card>
   )
 }
 

@@ -1,11 +1,16 @@
 import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
 import { CustomerList } from './CustomerList'
+import { CustomerItem } from './customers.types'
 
-function CustomerListPanel() {
+type Props = {
+  onSelectCustomer: (customer: CustomerItem) => void
+}
+
+function CustomerListPanel({ onSelectCustomer }: Props) {
   return (
     // TODO: 임시 Errorboundary
     <ErrorBoundary>
-      <CustomerList />
+      <CustomerList onSelectCustomer={onSelectCustomer} />
     </ErrorBoundary>
   )
 }

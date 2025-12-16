@@ -4,9 +4,14 @@ import { SearchOutlined } from '@ant-design/icons'
 import { Card, Input, Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
+import { CustomerItem } from './customers.types'
 import { useCustomersQuery } from './useCustomersQuery'
 
-function CustomerList() {
+type Props = {
+  onSelectCustomer: (customer: CustomerItem) => void
+}
+
+function CustomerList({ onSelectCustomer }: Props) {
   const [sortOrder, setSortOrder] = useState<SortOrder>(null)
 
   const [search, setSearch] = useState('')
@@ -45,6 +50,12 @@ function CustomerList() {
             setSortOrder(sorter.order ?? null)
           }
         }}
+        onRow={(record) => ({
+          onClick: () => {
+            onSelectCustomer(record)
+          },
+          style: { cursor: 'pointer' },
+        })}
         columns={[
           {
             title: 'ID',
