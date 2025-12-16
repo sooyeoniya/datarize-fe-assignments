@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchCustomerDetail } from './customerDetail.api'
+import { fetchCustomerDetail } from '../api/customer-purchases.api'
 
-export function useCustomerDetailQuery(customerId: number | null) {
+// TODO: 쿼리 폴더를 따로 분리해볼 수는 없을까,,
+export function useCustomerPurchasesQuery(customerId: number | null) {
   return useQuery({
     queryKey: ['customerDetail', customerId],
     queryFn: ({ queryKey, signal }) => {

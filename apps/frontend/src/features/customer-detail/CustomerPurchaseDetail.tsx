@@ -1,6 +1,6 @@
+import { useCustomerPurchasesQuery } from '@/entities/customer/query/useCustomerPurchasesQuery'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { Card, Col, Image, Row, Typography, theme } from 'antd'
-import { useCustomerDetailQuery } from './useCustomerDetailQuery'
 
 const { Text } = Typography
 
@@ -11,7 +11,7 @@ type Props = {
 // TODO: 여기도 로딩 추가하면 좋을듯!
 // TODO: 데이터가 없을 때는 Empty 컴포넌트 보여주기
 function CustomerPurchaseDetail({ customerId }: Props) {
-  const { data = [] } = useCustomerDetailQuery(customerId)
+  const { data = [] } = useCustomerPurchasesQuery(customerId)
   const { token } = theme.useToken()
 
   return (

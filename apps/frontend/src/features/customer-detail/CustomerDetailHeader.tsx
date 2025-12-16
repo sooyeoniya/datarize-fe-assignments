@@ -1,7 +1,7 @@
+import { CustomerItem } from '@/entities/customer/api/customers.types'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { DollarOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { Card, Col, Row, theme, Typography } from 'antd'
-import { CustomerItem } from '../customer-list/customers.types'
 
 const { Text } = Typography
 

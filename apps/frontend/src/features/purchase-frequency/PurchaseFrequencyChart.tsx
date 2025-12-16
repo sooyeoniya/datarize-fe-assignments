@@ -1,10 +1,10 @@
+import { usePurchaseFrequencSuspenseQuery } from '@/entities/purchase/query/usePurchaseFrequencySuspenseQuery'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { formatPriceRange } from '@/shared/lib/formatPriceRange'
 import { Card, DatePicker, theme } from 'antd'
 import dayjs, { Dayjs } from 'dayjs'
 import { useState } from 'react'
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { usePurchaseFrequencyQuery } from './usePurchaseFrequencyQuery'
 
 const { RangePicker } = DatePicker
 
@@ -17,7 +17,7 @@ function PurchaseFrequencyChart() {
   const { token } = theme.useToken()
 
   const [range, setRange] = useState<[Dayjs, Dayjs]>([dayjs(DEFAULT_FROM), dayjs(DEFAULT_TO)])
-  const { data } = usePurchaseFrequencyQuery({
+  const { data } = usePurchaseFrequencSuspenseQuery({
     from: range[0].format('YYYY-MM-DD'),
     to: range[1].format('YYYY-MM-DD'),
   })

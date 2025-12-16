@@ -1,7 +1,7 @@
 import { HttpError } from '@/shared/apis/http.error'
 import { useQuery } from '@tanstack/react-query'
-import { fetchCustomers } from './customers.api'
-import { CustomersParams } from './customers.types'
+import { fetchCustomers } from '../api/customers.api'
+import { CustomersParams } from '../api/customers.types'
 
 export function useCustomersQuery({ sortBy, name }: CustomersParams = {}) {
   return useQuery({

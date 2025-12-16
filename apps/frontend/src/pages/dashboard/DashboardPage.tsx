@@ -1,6 +1,6 @@
 import { CustomerDetailPanel } from '@/features/customer-detail'
 import { CustomerListPanel } from '@/features/customer-list'
-import { CustomerItem } from '@/features/customer-list/customers.types'
+import { CustomerItem } from '@/entities/customer/api/customers.types'
 import { PurchaseFrequencyPanel } from '@/features/purchase-frequency'
 import { useState } from 'react'
 import * as S from './DashboardPage.styled'

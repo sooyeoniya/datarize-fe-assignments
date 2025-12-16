@@ -1,11 +1,11 @@
+import { useCustomersQuery } from '@/entities/customer/query/useCustomersQuery'
 import { useDebounce } from '@/shared/hooks/useDebounce'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { SearchOutlined } from '@ant-design/icons'
 import { Card, Input, Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
-import { CustomerItem } from './customers.types'
-import { useCustomersQuery } from './useCustomersQuery'
+import { CustomerItem } from '../../entities/customer/api/customers.types'
 
 type Props = {
   onSelectCustomer: (customer: CustomerItem) => void

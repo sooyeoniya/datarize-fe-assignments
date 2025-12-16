@@ -1,6 +1,6 @@
 import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
 import { CustomerList } from './CustomerList'
-import { CustomerItem } from './customers.types'
+import { CustomerItem } from '../../entities/customer/api/customers.types'
 
 type Props = {
   onSelectCustomer: (customer: CustomerItem) => void
