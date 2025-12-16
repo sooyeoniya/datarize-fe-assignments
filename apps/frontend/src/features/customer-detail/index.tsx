@@ -1,5 +1,4 @@
-// TODO: 외부에서 타입 가져다 쓸 때는 api dto 를 참조하면 안되고 그 entity의 model 자체를 참조하기
-import { CustomerItem } from '@/entities/customer/api/customers.types'
+import { Customer } from '@/entities/customer/model/customer.model'
 import { UserOutlined } from '@ant-design/icons'
 import { Card, Typography } from 'antd'
 import { CustomerDetailHeader } from './CustomerDetailHeader'
@@ -8,7 +7,7 @@ import { CustomerPurchaseDetail } from './CustomerPurchaseDetail'
 const { Text } = Typography
 
 type Props = {
-  customer: CustomerItem | null
+  customer: Customer | null
 }
 
 function CustomerDetailPanel({ customer }: Props) {

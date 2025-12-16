@@ -1,11 +1,11 @@
-import { CustomerItem } from '@/entities/customer/api/customers.types'
+import { Customer } from '@/entities/customer/model/customer.model'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { DollarOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { Card, Col, Row, theme, Typography } from 'antd'
 
 const { Text } = Typography
 
-type Props = Pick<CustomerItem, 'count' | 'totalAmount'>
+type Props = Pick<Customer, 'count' | 'totalAmount'>
 
 function CustomerDetailHeader({ count, totalAmount }: Props) {
   const { token } = theme.useToken()

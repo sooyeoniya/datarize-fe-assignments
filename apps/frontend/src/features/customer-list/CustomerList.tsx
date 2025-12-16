@@ -5,10 +5,10 @@ import { SearchOutlined } from '@ant-design/icons'
 import { Card, Input, Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
-import { CustomerItem } from '../../entities/customer/api/customers.types'
+import { Customer } from '@/entities/customer/model/customer.model'
 
 type Props = {
-  onSelectCustomer: (customer: CustomerItem) => void
+  onSelectCustomer: (customer: Customer) => void
 }
 
 function CustomerList({ onSelectCustomer }: Props) {

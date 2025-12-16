@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchCustomerDetail } from '../api/customer-purchases.api'
+import { fetchCustomerPurchases } from '../api/customer-purchases.api'
 
-// TODO: 쿼리 폴더를 따로 분리해볼 수는 없을까,,
 export function useCustomerPurchasesQuery(customerId: number | null) {
   return useQuery({
-    queryKey: ['customerDetail', customerId],
+    queryKey: ['customerPurchases', customerId],
     queryFn: ({ queryKey, signal }) => {
       const [, id] = queryKey
 
@@ -12,7 +11,7 @@ export function useCustomerPurchasesQuery(customerId: number | null) {
         throw new Error('customerId is required')
       }
 
-      return fetchCustomerDetail(id, signal)
+      return fetchCustomerPurchases(id, signal)
     },
     enabled: customerId !== null,
     staleTime: 1000 * 60 * 30, // 30분 사실 자주 바뀌진 않을 데이터같음 (고객 목록과 비슷할지도..?)

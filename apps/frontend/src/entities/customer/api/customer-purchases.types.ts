@@ -1,11 +1,7 @@
-type ISODateString = `${number}-${number}-${number}`
+/**
+ * API DTO 타입 (API, Query에서만 허용)
+ */
 
-type CustomerPurchaseItem = {
-  date: ISODateString
-  product: string
-  quantity: number
-  price: number
-  imgSrc: string
-}
+import { CustomerPurchase } from '../model/customer.model'
 
-export type CustomerPurchaseDetailResponse = CustomerPurchaseItem[]
+export type CustomerPurchasesResponse = CustomerPurchase[]
