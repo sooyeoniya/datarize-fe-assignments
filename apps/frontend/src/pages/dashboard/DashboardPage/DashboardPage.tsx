@@ -1,10 +1,10 @@
+import { Customer } from '@/entities/customer/model/customer.model'
 import { CustomerDetailPanel } from '@/features/customer-detail'
 import { CustomerListPanel } from '@/features/customer-list'
-import { Customer } from '@/entities/customer/model/customer.model'
 import { PurchaseFrequencyPanel } from '@/features/purchase-frequency'
 import { useState } from 'react'
+import { DashboardLayout } from '../DashboardLayout'
 import * as S from './DashboardPage.styled'
-import { DashboardLayout } from './ui/DashboardLayout/DashboardLayout'
 
 function DashboardPage() {
   // TODO: Path Params로 넣으면 좋지 않을까? (새로고침 했을 때 데이터가 날라가는데, 고정시켜두면 좋지 않나 싶음)
