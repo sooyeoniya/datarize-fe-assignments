@@ -1,11 +1,11 @@
-import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
-import { CustomerList } from './CustomerList'
 import { Customer } from '@/entities/customer/model/customer.model'
-import { CustomerListContainer } from './ui/CustomerListContainer'
-import { useState } from 'react'
 import { useDebounce } from '@/shared/hooks/useDebounce'
-import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
+import { Input } from 'antd'
+import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
+import { useState } from 'react'
+import { CustomerList } from './ui/CustomerList'
+import { CustomerListContainer } from './ui/CustomerListContainer'
 
 type Props = {
   onSelectCustomer: (customer: Customer) => void
