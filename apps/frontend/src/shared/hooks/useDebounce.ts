@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-// TODO: 훅 테스트 작성
 export function useDebounce<T>(value: T, delay = 300) {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
