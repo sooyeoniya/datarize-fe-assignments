@@ -1,13 +1,17 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Card, Input, Table } from 'antd'
+import { SortOrder } from 'antd/es/table/interface'
+import { useState } from 'react'
 import { useCustomersQuery } from './useCustomersQuery'
 
 function CustomerList() {
-  // TODO: ID 기반으로 추가 정렬
   // TODO: 검색 기능 추가
-  // TODO: 정렬 기능 추가
+  const [sortOrder, setSortOrder] = useState<SortOrder>(null)
 
-  const { data = [], isFetching } = useCustomersQuery()
+  // TODO: 삼항연산자 -> 객체 방식으로 리팩터링
+  const { data = [], isFetching } = useCustomersQuery({
+    sortBy: sortOrder === 'ascend' ? 'asc' : sortOrder === 'descend' ? 'desc' : undefined,
+  })
 
   return (
     // TODO: 스타일 모두 분리
@@ -23,6 +27,11 @@ function CustomerList() {
         rowKey="id"
         dataSource={data}
         loading={isFetching}
+        onChange={(_, __, sorter) => {
+          if (!Array.isArray(sorter)) {
+            setSortOrder(sorter.order ?? null)
+          }
+        }}
         columns={[
           {
             title: 'ID',
@@ -44,6 +53,8 @@ function CustomerList() {
             title: '총 구매 금액',
             dataIndex: 'totalAmount',
             key: 'totalAmount',
+            sorter: true,
+            sortOrder,
           },
         ]}
       />
