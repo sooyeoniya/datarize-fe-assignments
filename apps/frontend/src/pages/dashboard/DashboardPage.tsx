@@ -6,7 +6,7 @@ import { DashboardLayout } from './ui/DashboardLayout/DashboardLayout'
 function DashboardPage() {
   return (
     <DashboardLayout>
-      <S.RootRow gutter={24}>
+      <S.RootRow gutter={24} style={{ margin: 0 }}>
         <S.LeftCol span={8}>
           <CustomerListPanel />
         </S.LeftCol>

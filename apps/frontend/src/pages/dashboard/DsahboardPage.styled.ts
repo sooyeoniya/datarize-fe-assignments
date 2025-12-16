@@ -4,7 +4,6 @@ import { Row, Col } from 'antd'
 export const RootRow = styled(Row)`
   height: 100%;
   width: 100%;
-  margin: 0;
 `
 
 export const LeftCol = styled(Col)`
