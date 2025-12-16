@@ -6,4 +6,9 @@ export const antdTheme = {
     colorPrimary: '#6366F1',
     borderRadius: 10,
   },
+  components: {
+    Table: {
+      rowHoverBg: '#eef2ff',
+    },
+  },
 }
