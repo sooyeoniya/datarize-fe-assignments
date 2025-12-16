@@ -5,19 +5,30 @@ import { useState } from 'react'
 import { useCustomersQuery } from './useCustomersQuery'
 
 function CustomerList() {
-  // TODO: 검색 기능 추가
   const [sortOrder, setSortOrder] = useState<SortOrder>(null)
+
+  // TODO: debounce 추가
+  const [search, setSearch] = useState('')
 
   // TODO: 삼항연산자 -> 객체 방식으로 리팩터링
   const { data = [], isFetching } = useCustomersQuery({
     sortBy: sortOrder === 'ascend' ? 'asc' : sortOrder === 'descend' ? 'desc' : undefined,
+    name: search || undefined,
   })
 
   return (
     // TODO: 스타일 모두 분리
     <Card
       title="고객 목록"
-      extra={<Input prefix={<SearchOutlined />} placeholder="고객 이름 검색" allowClear />}
+      extra={
+        <Input
+          prefix={<SearchOutlined />}
+          placeholder="고객 이름 검색"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          allowClear
+        />
+      }
       style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}
       styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'auto' } }}
     >
