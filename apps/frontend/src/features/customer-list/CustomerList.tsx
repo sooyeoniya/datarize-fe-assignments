@@ -3,13 +3,40 @@ import { useCustomersQuery } from '@/entities/customer/query/useCustomersQuery'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 import { Table } from 'antd'
-import { SortOrder } from 'antd/es/table/interface'
+import { ColumnsType, SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
 
 const SORT_ORDER_MAP = {
   ascend: 'asc',
   descend: 'desc',
 } as const
+
+const CUSTOMER_TABLE_COLUMNS = (sortOrder: SortOrder): ColumnsType<Customer> => [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: '이름',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: '총 구매 횟수',
+    dataIndex: 'count',
+    key: 'count',
+    render: (value: number) => formatNumber(value),
+  },
+  {
+    title: '총 구매 금액',
+    dataIndex: 'totalAmount',
+    key: 'totalAmount',
+    sorter: true,
+    sortOrder,
+    render: (value: number) => formatNumber(value),
+  },
+]
 
 type Props = {
   onSelectCustomer: (customer: Customer) => void
@@ -18,7 +45,6 @@ type Props = {
 
 function CustomerList({ onSelectCustomer, searchQuery }: Props) {
   const [sortOrder, setSortOrder] = useState<SortOrder>(null)
-
   const sortBy = sortOrder ? SORT_ORDER_MAP[sortOrder] : undefined
   const { data = [], isFetching } = useCustomersQuery({ sortBy, name: searchQuery || undefined })
 
@@ -33,43 +59,16 @@ function CustomerList({ onSelectCustomer, searchQuery }: Props) {
       rowKey="id"
       dataSource={data}
       loading={isFetching}
+      columns={CUSTOMER_TABLE_COLUMNS(sortOrder)}
       onChange={(_, __, sorter) => {
         if (!Array.isArray(sorter)) {
           setSortOrder(sorter.order ?? null)
         }
       }}
       onRow={(record) => ({
-        onClick: () => {
-          onSelectCustomer(record)
-        },
+        onClick: () => onSelectCustomer(record),
         style: { cursor: 'pointer' },
       })}
-      columns={[
-        {
-          title: 'ID',
-          dataIndex: 'id',
-          key: 'id',
-        },
-        {
-          title: '이름',
-          dataIndex: 'name',
-          key: 'name',
-        },
-        {
-          title: '총 구매 횟수',
-          dataIndex: 'count',
-          key: 'count',
-          render: (value: number) => formatNumber(value),
-        },
-        {
-          title: '총 구매 금액',
-          dataIndex: 'totalAmount',
-          key: 'totalAmount',
-          sorter: true,
-          sortOrder,
-          render: (value: number) => formatNumber(value),
-        },
-      ]}
     />
   )
 }
