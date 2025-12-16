@@ -1,9 +1,10 @@
 import { useCustomerPurchasesQuery } from '@/entities/customer/query/useCustomerPurchasesQuery'
 import { Col, Row, Spin } from 'antd'
 import { CustomerPurchaseItem } from './CustomerPurchaseItem'
+import { Customer } from '@/entities/customer/model/customer.model'
 
 type Props = {
-  customerId: number
+  customerId: Customer['id']
 }
 
 // TODO: 데이터가 없을 때는 Empty 컴포넌트 보여주기

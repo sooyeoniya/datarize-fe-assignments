@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchCustomerPurchases } from '../api/customer-purchases.api'
+import { Customer } from '../model/customer.model'
 
-export function useCustomerPurchasesQuery(customerId: number | null) {
+export function useCustomerPurchasesQuery(customerId: Customer['id'] | null) {
   return useQuery({
     queryKey: ['customerPurchases', customerId],
     queryFn: ({ queryKey, signal }) => {
