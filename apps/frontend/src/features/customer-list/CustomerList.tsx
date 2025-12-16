@@ -1,12 +1,12 @@
+import { Customer } from '@/entities/customer/model/customer.model'
 import { useCustomersQuery } from '@/entities/customer/query/useCustomersQuery'
 import { useDebounce } from '@/shared/hooks/useDebounce'
 import { formatNumber } from '@/shared/lib/formatNumber'
-import { SearchOutlined } from '@ant-design/icons'
-import { Card, Input, Table } from 'antd'
+import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
+import { Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
-import { Customer } from '@/entities/customer/model/customer.model'
-import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
+import { CustomerListContainer } from './ui/CustomerListContainer'
 
 const SORT_ORDER_MAP = {
   ascend: 'asc',
@@ -28,41 +28,14 @@ function CustomerList({ onSelectCustomer }: Props) {
 
   if (data.length === 0) {
     return (
-      <Card
-        title="고객 목록"
-        extra={
-          <Input
-            prefix={<SearchOutlined />}
-            placeholder="고객 이름 검색"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            allowClear
-          />
-        }
-        style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}
-        styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'auto' } }}
-      >
+      <CustomerListContainer search={debouncedSearch} onSearchChange={setSearch}>
         <EmptyFallback text="고객 목록 정보가 없습니다." />
-      </Card>
+      </CustomerListContainer>
     )
   }
 
   return (
-    // TODO: 스타일 모두 분리
-    <Card
-      title="고객 목록"
-      extra={
-        <Input
-          prefix={<SearchOutlined />}
-          placeholder="고객 이름 검색"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          allowClear
-        />
-      }
-      style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}
-      styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'auto' } }}
-    >
+    <CustomerListContainer search={debouncedSearch} onSearchChange={setSearch}>
       <Table
         size="small"
         pagination={false}
@@ -107,7 +80,7 @@ function CustomerList({ onSelectCustomer }: Props) {
           },
         ]}
       />
-    </Card>
+    </CustomerListContainer>
   )
 }
 
