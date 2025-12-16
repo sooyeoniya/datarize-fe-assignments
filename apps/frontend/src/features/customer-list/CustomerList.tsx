@@ -8,6 +8,11 @@ import { useState } from 'react'
 import { Customer } from '@/entities/customer/model/customer.model'
 import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 
+const SORT_ORDER_MAP = {
+  ascend: 'asc',
+  descend: 'desc',
+} as const
+
 type Props = {
   onSelectCustomer: (customer: Customer) => void
 }
@@ -18,11 +23,8 @@ function CustomerList({ onSelectCustomer }: Props) {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search)
 
-  // TODO: 삼항연산자 -> 객체 방식으로 리팩터링
-  const { data = [], isFetching } = useCustomersQuery({
-    sortBy: sortOrder === 'ascend' ? 'asc' : sortOrder === 'descend' ? 'desc' : undefined,
-    name: debouncedSearch || undefined,
-  })
+  const sortBy = sortOrder ? SORT_ORDER_MAP[sortOrder] : undefined
+  const { data = [], isFetching } = useCustomersQuery({ sortBy, name: debouncedSearch || undefined })
 
   if (data.length === 0) {
     return (
