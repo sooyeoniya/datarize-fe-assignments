@@ -1,11 +1,11 @@
 import { DashboardPage } from '@/pages/dashboard'
-import { AntdProvider } from './providers/antd'
+import { AppProviders } from './providers'
 
 function App() {
   return (
-    <AntdProvider>
+    <AppProviders>
       <DashboardPage />
-    </AntdProvider>
+    </AppProviders>
   )
 }
 
