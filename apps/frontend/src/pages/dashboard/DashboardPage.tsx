@@ -1,3 +1,4 @@
+import { CustomerDetailPanel } from '@/features/customer-detail'
 import { CustomerListPanel } from '@/features/customer-list'
 import { PurchaseFrequencyPanel } from '@/features/purchase-frequency'
 import * as S from './DsahboardPage.styled'
@@ -17,7 +18,9 @@ function DashboardPage() {
               <PurchaseFrequencyPanel />
             </S.PanelCol>
 
-            <S.PanelCol span={24}>{/* 고객 상세 구매 내역 패널 */}</S.PanelCol>
+            <S.PanelCol span={24}>
+              <CustomerDetailPanel />
+            </S.PanelCol>
           </S.RightInnerRow>
         </S.RightCol>
       </S.RootRow>
