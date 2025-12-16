@@ -2,10 +2,10 @@ import { Customer } from '@/entities/customer/model/customer.model'
 import { useDebounce } from '@/shared/hooks/useDebounce'
 import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
-import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
 import { useState } from 'react'
 import { CustomerList } from './ui/CustomerList'
 import { CustomerListContainer } from './ui/CustomerListContainer'
+import { ErrorBoundary } from '@/shared/ui/ErrorBoundary'
 
 type Props = {
   onSelectCustomer: (customer: Customer) => void
@@ -16,8 +16,7 @@ function CustomerListPanel({ onSelectCustomer }: Props) {
   const searchQuery = useDebounce(search)
 
   return (
-    // TODO: 임시 Errorboundary
-    <ErrorBoundary>
+    <ErrorBoundary title="고객 목록" queryKey={['customers']}>
       <CustomerListContainer
         extra={
           <Input
