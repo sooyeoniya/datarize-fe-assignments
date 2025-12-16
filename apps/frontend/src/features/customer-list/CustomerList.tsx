@@ -1,4 +1,5 @@
 import { useDebounce } from '@/shared/hooks/useDebounce'
+import { formatNumber } from '@/shared/lib/formatNumber'
 import { SearchOutlined } from '@ant-design/icons'
 import { Card, Input, Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
@@ -55,11 +56,11 @@ function CustomerList() {
             dataIndex: 'name',
             key: 'name',
           },
-          // TODO: 숫자 출력 포맷팅 (구매 횟수랑 구매 금액)
           {
             title: '총 구매 횟수',
             dataIndex: 'count',
             key: 'count',
+            render: (value: number) => formatNumber(value),
           },
           {
             title: '총 구매 금액',
@@ -67,6 +68,7 @@ function CustomerList() {
             key: 'totalAmount',
             sorter: true,
             sortOrder,
+            render: (value: number) => formatNumber(value),
           },
         ]}
       />
