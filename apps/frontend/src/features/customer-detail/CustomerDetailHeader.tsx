@@ -1,9 +1,8 @@
 import { Customer } from '@/entities/customer/model/customer.model'
 import { formatNumber } from '@/shared/lib/formatNumber'
 import { DollarOutlined, ShoppingCartOutlined } from '@ant-design/icons'
-import { Card, Col, Row, theme, Typography } from 'antd'
-
-const { Text } = Typography
+import { Col, Row, theme } from 'antd'
+import { StatCard } from './ui/StatCard/StatCard'
 
 type Props = Pick<Customer, 'count' | 'totalAmount'>
 
@@ -12,25 +11,20 @@ function CustomerDetailHeader({ count, totalAmount }: Props) {
 
   return (
     <Row gutter={16}>
-      {/* TODO: 공통 컴포넌트 추출 */}
       <Col span={12}>
-        <Card variant="borderless" style={{ background: '#f3f6ff' }} styles={{ body: { padding: 10 } }}>
-          <ShoppingCartOutlined style={{ fontSize: 20, color: token.colorPrimary }} />
-          <Text style={{ marginLeft: 8 }}>총 구매 횟수: </Text>
-          <Text style={{ margin: '8px 0 0', color: token.colorPrimary }} strong>
-            {count}회
-          </Text>
-        </Card>
+        <StatCard
+          icon={<ShoppingCartOutlined style={{ fontSize: 20, color: token.colorPrimary }} />}
+          label="총 구매 횟수:"
+          value={`${count}회`}
+        />
       </Col>
 
       <Col span={12}>
-        <Card variant="borderless" style={{ background: '#f3f6ff' }} styles={{ body: { padding: 10 } }}>
-          <DollarOutlined style={{ fontSize: 20, color: token.colorPrimary }} />
-          <Text style={{ marginLeft: 8 }}>총 구매 금액: </Text>
-          <Text style={{ margin: '8px 0 0', color: token.colorPrimary }} strong>
-            {formatNumber(totalAmount)}원
-          </Text>
-        </Card>
+        <StatCard
+          icon={<DollarOutlined style={{ fontSize: 20, color: token.colorPrimary }} />}
+          label="총 구매 금액:"
+          value={`${formatNumber(totalAmount)}원`}
+        />
       </Col>
     </Row>
   )
