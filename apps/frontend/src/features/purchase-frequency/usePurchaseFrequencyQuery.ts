@@ -6,7 +6,7 @@ import { PurchaseFrequencyParams } from './purchaseFrequency.types'
 export function usePurchaseFrequencyQuery({ from, to }: PurchaseFrequencyParams = {}) {
   return useSuspenseQuery({
     queryKey: ['purchaseFrequency', { from, to }],
-    queryFn: () => fetchPurchaseFrequency({ from, to }),
+    queryFn: ({ signal }) => fetchPurchaseFrequency({ from, to }, signal),
     staleTime: 1000 * 60 * 10,
 
     // 10분 -> 거의 변하지 않는 데이터일 가능성이 높음

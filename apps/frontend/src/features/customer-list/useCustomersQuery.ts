@@ -6,9 +6,9 @@ import { CustomersParams } from './customers.types'
 export function useCustomersQuery({ sortBy, name }: CustomersParams = {}) {
   return useQuery({
     queryKey: ['customers', { sortBy, name }],
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       try {
-        return await fetchCustomers({ sortBy, name })
+        return await fetchCustomers({ sortBy, name }, signal)
       } catch (e) {
         if (e instanceof HttpError && e.status === 404) {
           return [] // 검색 결과 없음

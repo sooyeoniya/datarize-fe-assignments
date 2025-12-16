@@ -2,24 +2,16 @@ import { buildQuery } from './buildQuery'
 import { HttpError } from './http.error'
 import { HttpOptions } from './types'
 
-export async function httpGet<T>(url: string, options?: HttpOptions): Promise<T> {
-  const query = buildQuery(options?.params)
+export async function httpGet<T>(url: string, { params, signal }: HttpOptions = {}): Promise<T> {
+  const query = buildQuery(params)
   const fullUrl = query ? `${url}?${query}` : url
 
-  try {
-    const res = await fetch(fullUrl, { signal: options?.signal })
+  const res = await fetch(fullUrl, { signal })
 
-    if (!res.ok) {
-      const message = await res.text()
-      throw new HttpError(res.status, message || res.statusText)
-    }
-
-    return res.json()
-  } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      throw error
-    }
-
-    throw error
+  if (!res.ok) {
+    const message = await res.text()
+    throw new HttpError(res.status, message || res.statusText)
   }
+
+  return res.json()
 }
