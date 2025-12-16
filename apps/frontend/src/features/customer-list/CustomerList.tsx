@@ -1,3 +1,4 @@
+import { useDebounce } from '@/shared/hooks/useDebounce'
 import { SearchOutlined } from '@ant-design/icons'
 import { Card, Input, Table } from 'antd'
 import { SortOrder } from 'antd/es/table/interface'
@@ -7,13 +8,13 @@ import { useCustomersQuery } from './useCustomersQuery'
 function CustomerList() {
   const [sortOrder, setSortOrder] = useState<SortOrder>(null)
 
-  // TODO: debounce 추가
   const [search, setSearch] = useState('')
+  const debouncedSearch = useDebounce(search)
 
   // TODO: 삼항연산자 -> 객체 방식으로 리팩터링
   const { data = [], isFetching } = useCustomersQuery({
     sortBy: sortOrder === 'ascend' ? 'asc' : sortOrder === 'descend' ? 'desc' : undefined,
-    name: search || undefined,
+    name: debouncedSearch || undefined,
   })
 
   return (
