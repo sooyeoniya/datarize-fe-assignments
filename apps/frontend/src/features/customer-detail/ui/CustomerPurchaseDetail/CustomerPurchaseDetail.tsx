@@ -3,6 +3,7 @@ import { useCustomerPurchasesQuery } from '@/entities/customer/query/useCustomer
 import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
 import { Col, Row, Spin } from 'antd'
 import { CustomerPurchaseItem } from './CustomerPurchaseItem'
+import { Centered } from '@/shared/ui/Centered'
 
 type Props = {
   customerId: Customer['id']
@@ -37,21 +38,6 @@ function CustomerPurchaseDetail({ customerId }: Props) {
         </Col>
       ))}
     </Row>
-  )
-}
-
-function Centered({ children }: React.PropsWithChildren) {
-  return (
-    <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      {children}
-    </div>
   )
 }
 

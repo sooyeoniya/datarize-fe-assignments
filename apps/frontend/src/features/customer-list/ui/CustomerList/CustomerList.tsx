@@ -1,8 +1,9 @@
 import { Customer } from '@/entities/customer/model/customer.model'
 import { useCustomersQuery } from '@/entities/customer/query/useCustomersQuery'
 import { formatNumber } from '@/shared/lib/formatNumber'
+import { Centered } from '@/shared/ui/Centered'
 import { EmptyFallback } from '@/shared/ui/fallbacks/EmptyFallback'
-import { Table, TableProps } from 'antd'
+import { Spin, Table, TableProps } from 'antd'
 import { ColumnsType, SortOrder } from 'antd/es/table/interface'
 import { useState } from 'react'
 
@@ -47,7 +48,15 @@ function CustomerList({ onSelectCustomer, searchQuery }: Props) {
   const [sortOrder, setSortOrder] = useState<SortOrder>(null)
   const sortBy = sortOrder ? SORT_ORDER_MAP[sortOrder] : undefined
 
-  const { data = [], isFetching } = useCustomersQuery({ sortBy, name: searchQuery || undefined })
+  const { data = [], isLoading, isFetching } = useCustomersQuery({ sortBy, name: searchQuery || undefined })
+
+  if (isLoading) {
+    return (
+      <Centered>
+        <Spin />
+      </Centered>
+    )
+  }
 
   if (data.length === 0) {
     return <EmptyFallback text="고객 목록 정보가 없습니다." />
