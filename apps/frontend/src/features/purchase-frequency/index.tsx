@@ -10,7 +10,6 @@ const { RangePicker } = DatePicker
 
 const CARD_TITLE = '가격대별 구매 빈도'
 
-// TODO: 날짜 데이터도 path params에 넣는 거 어떨까?
 const DEFAULT_FROM = '2024-07-01'
 const DEFAULT_TO = '2024-07-31'
 

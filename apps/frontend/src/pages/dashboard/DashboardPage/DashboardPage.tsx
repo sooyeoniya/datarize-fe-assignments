@@ -7,7 +7,6 @@ import { DashboardLayout } from '../DashboardLayout'
 import * as S from './DashboardPage.styled'
 
 function DashboardPage() {
-  // TODO: Path Params로 넣으면 좋지 않을까? (새로고침 했을 때 데이터가 날라가는데, 고정시켜두면 좋지 않나 싶음)
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
 
   return (
