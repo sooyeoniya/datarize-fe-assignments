@@ -6,12 +6,6 @@ export function usePurchaseFrequencSuspenseQuery({ from, to }: PurchaseFrequency
   return useSuspenseQuery({
     queryKey: ['purchaseFrequency', { from, to }],
     queryFn: ({ signal }) => fetchPurchaseFrequency({ from, to }, signal),
-    staleTime: 1000 * 60 * 10,
-
-    // 10분 -> 거의 변하지 않는 데이터일 가능성이 높음
-    // 최신 날짜 범위를 선택하지 않는 이상
-    // 그래서 staleTime을 좀 길게 가져감
-    // 사실 이것보다 더 길게 해도 되긴함 30분~1시간
-    // 그래도 일단은 10분으로 처리
+    staleTime: 1000 * 60 * 30,
   })
 }

@@ -15,6 +15,6 @@ export function useCustomerPurchasesQuery(customerId: Customer['id'] | null) {
       return fetchCustomerPurchases(id, signal)
     },
     enabled: customerId !== null,
-    staleTime: 1000 * 60 * 30, // 30분 사실 자주 바뀌진 않을 데이터같음 (고객 목록과 비슷할지도..?)
+    staleTime: 1000 * 60 * 30,
   })
 }
